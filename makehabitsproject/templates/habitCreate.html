@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<form action="" method="POST"> {% csrf_token %}
+    <div class="container">
+        {{form.as_p}}
+        <!-- <input class="" type="submit" value="作成する"> -->
+        <button class="btn waves-effect waves-light" type="submit" name="action">作成
+            <i class="material-icons right">create</i>
+        </button>
+    </div>
+</form>
+
+{% endblock content %}
