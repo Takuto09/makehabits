@@ -1,10 +1,14 @@
 ---
-name: 機能追加:〇〇
-about: 概要:XXX
-title: ''
+name: 機能追加
+about: 必要な機能がある場合、こちらを利用してください。
+title: '機能追加:'
 labels: enhancement
 assignees: ''
+---
 
+---
+name: 機能追加
+about: 必要な機能がある場合、こちらを利用してください。
 ---
 
 ## 必要な機能性
