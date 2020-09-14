@@ -1,20 +1,19 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: 機能追加:〇〇
+about: 概要:XXX
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 必要な機能性
+例) メニューバーが必要
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## 実装する目的
+例) どこに、どのような機能があるかわからない
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## タスク
+- [ ] 調査
+- [ ] 設計
+- [ ] 実装
