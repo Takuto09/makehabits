@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="form">
+    <div class="container">
+        {% if form.errors  %}
+        <p>ユーザーID, パスワードが一致しません．</p>
+        {% endif %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label>ユーザーID</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+            <label>パスワード</label>
+            {{ form.password }}
+            {{ form.password.errors }}
+            <button class="btn waves-effect waves-light" type="submit" name="action">ログイン
+                <i class="material-icons right">forward</i>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
