@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="form">
+    <div class="container">
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <label>ユーザーID</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+            <label>パスワード</label>
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+            <label>パスワード(確認)</label>
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+            <button class="btn waves-effect waves-light" type="submit" name="action">登録
+                <i class="material-icons right">forward</i>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
