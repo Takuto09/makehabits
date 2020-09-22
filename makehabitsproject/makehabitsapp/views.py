@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -8,7 +9,7 @@ from .forms import LoginForm, UserCreateForm
 from .models import HabitModel
 
 
-class HabitList(ListView):
+class HabitList(LoginRequiredMixin, ListView):
     template_name = 'habitList.html'
     model = HabitModel
 
