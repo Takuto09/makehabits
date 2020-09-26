@@ -13,6 +13,9 @@ class HabitList(LoginRequiredMixin, ListView):
     template_name = 'habitList.html'
     model = HabitModel
 
+    def get_queryset(self):
+        return HabitModel.objects.filter(user_id=self.request.user.id)
+
 
 class HabitDetail(DetailView):
     template_name = 'habitDetail.html'
@@ -24,6 +27,17 @@ class HabitCreate(CreateView):
     model = HabitModel
     fields = ('title', 'memo')
     success_url = reverse_lazy('habitList')
+
+    def post(self, request, *args, **kwargs):
+        # context_object_name = 'habitCreate'
+        # form = self.form_class(request.POST)
+        # if self.form_class.is_valid():
+        form = self.get_form()
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user_id = self.request.user.id
+            obj.save()
+            return super().post(request, *args, **kwargs)
 
 
 class Create_account(CreateView):
