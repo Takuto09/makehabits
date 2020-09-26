@@ -29,9 +29,6 @@ class HabitCreate(CreateView):
     success_url = reverse_lazy('habitList')
 
     def post(self, request, *args, **kwargs):
-        # context_object_name = 'habitCreate'
-        # form = self.form_class(request.POST)
-        # if self.form_class.is_valid():
         form = self.get_form()
         if form.is_valid():
             obj = form.save(commit=False)
