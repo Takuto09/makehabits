@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, View
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, View
 
 from .forms import LoginForm, UserCreateForm
 from .models import HabitModel
@@ -35,6 +35,13 @@ class HabitCreate(CreateView):
             obj.user_id = self.request.user.id
             obj.save()
             return super().post(request, *args, **kwargs)
+
+
+class HabitUpdate(UpdateView):
+    template_name = 'habitUpdate.html'
+    model = HabitModel
+    fields = ('title', 'memo')
+    success_url = reverse_lazy('habitList')
 
 
 class Create_account(CreateView):

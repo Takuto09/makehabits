@@ -22,7 +22,9 @@
                     <td>
                         <label>
                             <input type="checkbox" />
-                            <span>{{ item.title }}</span>
+                            <span>
+                                <a href="{% url 'habitUpdate' item.pk %}">{{ item.title }}</a>
+                            </span>
                         </label>
                     </td>
                     <td>
