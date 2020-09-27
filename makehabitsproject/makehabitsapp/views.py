@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
@@ -77,3 +77,8 @@ class Account_login(View):
 
 
 account_login = Account_login.as_view()
+
+
+def logoutfunc(request):
+    logout(request)
+    return redirect('login')
