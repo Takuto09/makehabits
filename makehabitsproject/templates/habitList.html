@@ -21,7 +21,15 @@
                 <tr>
                     <td>
                         <label>
-                            <input type="checkbox" />
+                            {% if item.achieves %}
+                            <a href="#" class="waves-effect waves-teal">
+                                <i class="material-icons">check_box</i>
+                            </a>
+                            {% else %}
+                            <a href="#" class="waves-effect waves-teal">
+                                <i class="material-icons">check_box_outline_blank</i>
+                            </a>
+                            {% endif %}
                             <span>
                                 <a href="{% url 'habitUpdate' item.pk %}">{{ item.title }}</a>
                             </span>
