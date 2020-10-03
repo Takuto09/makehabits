@@ -21,16 +21,16 @@
                 <tr>
                     <td>
                         <label>
-                            {% if item.achieves %}
-                            <a href="#" class="waves-effect waves-teal">
+                            <!-- <a href="{% url 'achieve' item.pk %}" class="waves-effect waves-teal"> -->
+                            <a href="{% url 'achieve' item.pk %}" class="waves-effect waves-teal">
+                                {% if item.achieve %}
                                 <i class="material-icons">check_box</i>
-                            </a>
-                            {% else %}
-                            <a href="#" class="waves-effect waves-teal">
+                                {% else %}
                                 <i class="material-icons">check_box_outline_blank</i>
+                                {% endif %}
                             </a>
-                            {% endif %}
                             <span>
+                                {{item.user_id}}{{item.habit_id}}
                                 <a href="{% url 'habitUpdate' item.pk %}">{{ item.title }}</a>
                             </span>
                         </label>
