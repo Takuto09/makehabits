@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import HabitList, HabitDetail, HabitCreate, HabitUpdate, Account_login, Create_account, logoutfunc
+from .views import HabitList, HabitDetail, HabitCreate, HabitUpdate, Account_login, Create_account, logoutfunc, achievefunc
 
 urlpatterns = [
     path('habitList/', HabitList.as_view(), name='habitList'),
+    path('achieve/<int:pk>', achievefunc, name='achieve'),
     path('habitDetail/<int:pk>', HabitDetail.as_view(), name='habitDetail'),
     path('habitCreate/', HabitCreate.as_view(), name='habitCreate'),
     path('habitUpdate/<int:pk>', HabitUpdate.as_view(), name='habitUpdate'),

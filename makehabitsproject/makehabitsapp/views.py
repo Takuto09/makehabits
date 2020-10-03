@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, View
 
 from .forms import LoginForm, UserCreateForm
-from .models import HabitModel
+from .models import HabitModel, AchievesModel
 
 
 class HabitList(LoginRequiredMixin, ListView):
@@ -89,3 +89,23 @@ account_login = Account_login.as_view()
 def logoutfunc(request):
     logout(request)
     return redirect('login')
+
+
+def achievefunc(request, pk):
+    print('デバッグstart')
+    post = HabitModel.objects.get(pk=pk)
+    # print('デバッグstart')
+    # print(post.user_id)
+    # print(post.habit_id)
+    # print('デバッグend')
+    # key情報(user_id、habit_id、日付)のデータを取得
+    achieve = AchievesModel.objects.filter(
+        user_id=request.user.id, habit_id=post.habit_id)
+    if achieve.count() == 0:
+        print('作成')
+    else:
+        print('削除')
+    post.achieve = not post.achieve
+    post.save()
+    print('デバッグ終了')
+    return redirect('/habitList')
