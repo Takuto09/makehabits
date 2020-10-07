@@ -30,8 +30,6 @@
                                 {% endif %}
                             </a>
                             <span>
-                                ユーザID:{{item.user_id}} 習慣ID:{{item.habit_id}} PK:{{item.pk}}
-                                実施回数:{{item.achieves}}<br>
                                 <a href="{% url 'habitUpdate' item.pk %}">{{ item.title }}</a>
                             </span>
                         </label>
