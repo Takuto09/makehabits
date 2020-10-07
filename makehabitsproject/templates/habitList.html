@@ -23,14 +23,13 @@
                         <label>
                             <!-- <a href="{% url 'achieve' item.pk %}" class="waves-effect waves-teal"> -->
                             <a href="{% url 'achieve' item.pk %}" class="waves-effect waves-teal">
-                                {% if item.achieve %}
+                                {% if item.achieves > 0 %}
                                 <i class="material-icons">check_box</i>
                                 {% else %}
                                 <i class="material-icons">check_box_outline_blank</i>
                                 {% endif %}
                             </a>
                             <span>
-                                {{item.user_id}}{{item.habit_id}}
                                 <a href="{% url 'habitUpdate' item.pk %}">{{ item.title }}</a>
                             </span>
                         </label>
