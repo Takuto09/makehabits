@@ -1,12 +1,16 @@
+import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db.models import Count, Q
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, View
+from django.views.generic import (CreateView, DetailView, ListView, UpdateView,
+                                  View)
 
 from .forms import LoginForm, UserCreateForm
-from .models import HabitModel, AchievesModel
+from .models import AchievesModel, HabitModel
 
 
 class HabitList(LoginRequiredMixin, ListView):
@@ -14,7 +18,15 @@ class HabitList(LoginRequiredMixin, ListView):
     model = HabitModel
 
     def get_queryset(self):
-        return HabitModel.objects.filter(user_id=self.request.user.id)
+        today_min = datetime.datetime.combine(
+            datetime.date.today(), datetime.time.min)
+        today_max = datetime.datetime.combine(
+            datetime.date.today(), datetime.time.max)
+        today_achieves = Count('achievesmodel', filter=Q(
+            achievesmodel__created_date__range=(today_min, today_max)))
+        queryset = HabitModel.objects.filter(
+            user_id=self.request.user.id).annotate(achieves=today_achieves)
+        return queryset
 
 
 class HabitDetail(DetailView):
@@ -92,20 +104,22 @@ def logoutfunc(request):
 
 
 def achievefunc(request, pk):
-    print('デバッグstart')
     post = HabitModel.objects.get(pk=pk)
-    # print('デバッグstart')
-    # print(post.user_id)
-    # print(post.habit_id)
-    # print('デバッグend')
-    # key情報(user_id、habit_id、日付)のデータを取得
-    achieve = AchievesModel.objects.filter(
-        user_id=request.user.id, habit_id=post.habit_id)
-    if achieve.count() == 0:
-        print('作成')
+
+    # key情報(habit_id、日付)のデータを取得
+    today_min = datetime.datetime.combine(
+        datetime.date.today(), datetime.time.min)
+    today_max = datetime.datetime.combine(
+        datetime.date.today(), datetime.time.max)
+    achieves = AchievesModel.objects.filter(
+        habit__habit_id=post.habit_id, created_date__range=(today_min, today_max))
+
+    if achieves.count() == 0:
+        # データが存在しない場合、新規作成
+        new_achieve = AchievesModel()
+        new_achieve.habit = post
+        new_achieve.save()
     else:
-        print('削除')
-    post.achieve = not post.achieve
-    post.save()
-    print('デバッグ終了')
+        # データが存在する場合、削除
+        achieves.delete()
     return redirect('/habitList')
