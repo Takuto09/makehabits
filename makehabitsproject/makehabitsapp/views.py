@@ -8,6 +8,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DetailView, ListView, UpdateView,
                                   View)
+from django.utils import timezone
 
 from .forms import LoginForm, UserCreateForm
 from .models import AchievesModel, HabitModel

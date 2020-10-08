@@ -124,3 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = 'login'
+
+# 東京のタイムゾーンに設定
+TIME_ZONE = 'Asia/Tokyo'
+
+# タイムゾーンを使用するかどうか
+USE_TZ = True
