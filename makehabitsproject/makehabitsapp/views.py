@@ -105,13 +105,13 @@ def logoutfunc(request):
 def achievefunc(request, pk):
     post = HabitModel.objects.get(pk=pk)
 
-    # key情報(habit_id、日付)のデータを取得
+    # key情報(id、日付)のデータを取得
     today_min = datetime.datetime.combine(
         datetime.date.today(), datetime.time.min)
     today_max = datetime.datetime.combine(
         datetime.date.today(), datetime.time.max)
     achieves = AchievesModel.objects.filter(
-        habit__habit_id=post.habit_id, created_date__range=(today_min, today_max))
+        habit__id=post.id, created_date__range=(today_min, today_max))
 
     if achieves.count() == 0:
         # データが存在しない場合、新規作成
