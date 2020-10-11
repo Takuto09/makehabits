@@ -41,13 +41,11 @@ class HabitCreate(CreateView):
     fields = ('title', 'memo')
     success_url = reverse_lazy('habitList')
 
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.user_id = self.request.user.id
-            obj.save()
-            return super().post(request, *args, **kwargs)
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user_id = self.request.user.id
+        obj.save()
+        return redirect(self.success_url)
 
 
 class HabitUpdate(UpdateView):
