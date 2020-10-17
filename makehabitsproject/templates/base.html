@@ -21,6 +21,17 @@
 </head>
 
 <body>
+    <nav class="nav-wraper">
+        <div class="cotainer">
+            <ul class="right">
+                <li>
+                    <a href="{% url 'logout' %}" class="waves-effect waves-light">
+                        <i class="material-icons left">exit_to_app</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     {% block header %}
     {% endblock header %}
 
