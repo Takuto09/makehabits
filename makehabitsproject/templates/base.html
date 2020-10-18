@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    {% block header %}
     <nav class="nav-wraper">
         <div class="cotainer">
             <ul class="right">
@@ -32,7 +33,6 @@
             </ul>
         </div>
     </nav>
-    {% block header %}
     {% endblock header %}
 
     {% block content %}
