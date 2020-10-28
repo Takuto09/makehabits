@@ -79,8 +79,10 @@ WSGI_APPLICATION = 'makehabitsproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'habit_app', # プロジェクトで使用するデータベース名
+        'USER': 'root', # パソコンにインストールしたMySQLのユーザー名
+        'PASSWORD': '', # 同上。そのパスワード
     }
 }
 
